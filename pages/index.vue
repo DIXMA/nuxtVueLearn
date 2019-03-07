@@ -19,10 +19,9 @@
                 albums: []
             }
         },
-        created(){
-            axios.get(`${env.endpoint}/albums`).then(response =>{
-                this.albums = response.data;
-            })
+        created: async function(){
+            let albumsResponse = await axios.get(`${env.endpoint}/albums`);
+            this.albums = albumsResponse.data;
         }
     }
 </script>

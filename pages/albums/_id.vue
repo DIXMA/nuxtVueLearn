@@ -22,14 +22,12 @@
                 photos: []
             }
         },
-        created() {
+        created: async function(){
             let id = this.$route.params.id;
-            axios.get(`${env.endpoint}/albums/${id}`).then(response => {
-                this.album = response.data;
-            });
-            axios.get(`${env.endpoint}/albums/${id}/photos`).then(response => {
-                this.photos = response.data;
-            });
+            let albumResponse = await axios.get(`${env.endpoint}/albums/${id}`);
+            this.album = albumResponse.data;
+            let photoResponse = await axios.get(`${env.endpoint}/albums/${id}/photos`);
+            this.photos = photoResponse.data;
         }
     }
 </script>
